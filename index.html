@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Зениксор — ссылки</title>
+  <meta name="description" content="Делаю игры в Roblox Studio, сайты и ботов. Все ссылки Зениксора в одном месте.">
+  <meta name="theme-color" content="#EFEDF8">
+  <meta property="og:title" content="Зениксор">
+  <meta property="og:description" content="Делаю игры в Roblox Studio, сайты и ботов. Со мной просто — но угадай, че выкину.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%23C8F135' stroke='%231D1B2F' stroke-width='5'/%3E%3Ctext x='32' y='44' font-family='Arial Black,Arial' font-weight='900' font-size='34' text-anchor='middle' fill='%231D1B2F'%3EZ%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Панель редактора (видна только после входа) -->
+  <div class="admin-bar" id="adminBar" hidden>
+    <span class="admin-bar__title"><span class="dot"></span>Режим редактора</span>
+    <span class="admin-bar__state" id="unsaved" hidden>есть неопубликованные изменения</span>
+    <div class="admin-bar__actions">
+      <button class="btn btn--lime" id="addBtn" type="button">+ Кнопка</button>
+      <button class="btn" id="publishBtn" type="button">Опубликовать</button>
+      <button class="btn" id="exportBtn" type="button" title="Скачать links.json">Скачать JSON</button>
+      <button class="btn btn--ghost" id="logoutBtn" type="button">Выйти</button>
+    </div>
+  </div>
+
+  <main class="page">
+    <section class="profile">
+      <div class="profile__top">
+        <button class="avatar" id="avatar" type="button" aria-label="Зениксор">Z</button>
+        <span class="status"><span class="dot"></span>иногда онлайн</span>
+      </div>
+
+      <h1 class="name">Зениксор</h1>
+      <p class="bio">Делаю игры в Roblox Studio, сайты и ботов. Со мной просто — но угадай, че выкину.</p>
+
+      <ul class="tags">
+        <li class="tag tag--dark">113K в TikTok</li>
+        <li class="tag">Roblox Studio</li>
+        <li class="tag">Сайты · Боты</li>
+        <li class="tag">RU · EN · <span lang="ar">عربي</span></li>
+      </ul>
+
+      <div class="spin">
+        <div class="spin__head">
+          <span class="spin__label">Предсказание для тебя</span>
+          <span class="spin__try" id="spinTry">попытка #1</span>
+        </div>
+        <p class="spin__idea" id="spinIdea">Гусь. Просто гусь. Будь готов.</p>
+        <button class="spin__btn" id="spinBtn" type="button">
+          <span class="spin__dice" id="spinDice"></span>Крутануть
+        </button>
+      </div>
+
+      <p class="footer">Zenixor · <span id="year">2026</span> · собрано на чистом наггетсе</p>
+    </section>
+
+    <section class="links-col">
+      <h2 class="links-title">Куда тыкать</h2>
+      <div class="links" id="links"></div>
+
+      <div class="secret">
+        <span class="secret__icon" id="secretIcon"></span>
+        <div>
+          <div class="secret__title">Секретная ссылка</div>
+          <div class="secret__desc">Появится, когда выкину. Когда — не скажу</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Вход: «поиск» с паролем -->
+  <div class="overlay" id="loginOverlay" hidden>
+    <form class="search" id="loginForm" autocomplete="off">
+      <span class="search__icon" id="searchIcon"></span>
+      <input class="search__input" id="loginInput" type="password" placeholder="Поиск…" aria-label="Пароль">
+      <button class="search__go" type="submit" aria-label="Войти">↵</button>
+    </form>
+  </div>
+
+  <!-- Редактор кнопки -->
+  <div class="overlay" id="editorOverlay" hidden>
+    <form class="modal" id="editorForm" autocomplete="off">
+      <div class="modal__head">
+        <h3 id="editorTitle">Новая кнопка</h3>
+        <button class="icon-btn" type="button" data-close aria-label="Закрыть">✕</button>
+      </div>
+
+      <div class="preview" id="preview"></div>
+
+      <label class="field">
+        <span>Название *</span>
+        <input id="fTitle" maxlength="60" required placeholder="Например: Discord-сервер">
+      </label>
+      <label class="field">
+        <span>Описание</span>
+        <input id="fDesc" maxlength="90" placeholder="Коротко, что там">
+      </label>
+      <label class="field">
+        <span>Ссылка (URL) *</span>
+        <input id="fUrl" required placeholder="https://…" inputmode="url">
+      </label>
+      <label class="field">
+        <span>Плашка рядом с названием <em>(необязательно)</em></span>
+        <input id="fBadge" maxlength="14" placeholder="например: игра, new, скидка">
+      </label>
+
+      <div class="field">
+        <span>Цвет иконки</span>
+        <div class="swatches" id="swatches"></div>
+      </div>
+
+      <div class="field">
+        <span>Иконка</span>
+        <input id="iconSearch" placeholder="Найти иконку…">
+        <div class="icon-grid" id="iconGrid"></div>
+      </div>
+
+      <div class="modal__foot">
+        <button class="btn btn--danger" type="button" id="deleteBtn">Удалить</button>
+        <span class="spacer"></span>
+        <button class="btn btn--ghost" type="button" data-close>Отмена</button>
+        <button class="btn btn--lime" type="submit">Сохранить</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Настройки публикации на GitHub -->
+  <div class="overlay" id="ghOverlay" hidden>
+    <form class="modal" id="ghForm" autocomplete="off">
+      <div class="modal__head">
+        <h3>Публикация</h3>
+        <button class="icon-btn" type="button" data-close aria-label="Закрыть">✕</button>
+      </div>
+      <p class="hint">Чтобы изменения увидели все, сайт сохраняет <b>links.json</b> прямо в твой репозиторий на GitHub (GitHub Pages обновится через ~1 минуту). Данные ниже хранятся только в этом браузере.</p>
+      <label class="field"><span>Владелец (логин GitHub)</span><input id="ghOwner" required placeholder="zenixor"></label>
+      <label class="field"><span>Репозиторий</span><input id="ghRepo" required placeholder="zenixor.github.io"></label>
+      <label class="field"><span>Ветка</span><input id="ghBranch" placeholder="main"></label>
+      <label class="field"><span>Токен (fine-grained, доступ Contents: Read and write)</span><input id="ghToken" type="password" required placeholder="github_pat_…"></label>
+      <div class="modal__foot">
+        <button class="btn btn--ghost" type="button" data-close>Отмена</button>
+        <span class="spacer"></span>
+        <button class="btn btn--lime" type="submit">Сохранить и опубликовать</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="icons.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

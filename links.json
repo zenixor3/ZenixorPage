@@ -1,0 +1,11 @@
+{
+  "updated": "2026-10-27T00:00:00.000Z",
+  "links": [
+    { "id": "tiktok",   "title": "TikTok",                  "desc": "Roblox-мемы и геймдев · 113K",       "url": "https://www.tiktok.com/@zenixor",   "icon": "tiktok",   "color": "orange", "badge": "" },
+    { "id": "telegram", "title": "Telegram-канал",          "desc": "Девлоги, новости и закулисье",       "url": "https://t.me/zenixor",              "icon": "telegram", "color": "blue",   "badge": "" },
+    { "id": "chat",     "title": "Убежище подписчиков",     "desc": "Наш чат. Правила есть, скуки нет",   "url": "https://t.me/zenixor_chat",         "icon": "chat",     "color": "purple", "badge": "" },
+    { "id": "youtube",  "title": "YouTube",                 "desc": "Видео подлиннее и разборы",          "url": "https://www.youtube.com/@zenixor",  "icon": "youtube",  "color": "yellow", "badge": "" },
+    { "id": "game",     "title": "Riftbound",               "desc": "RPG + Tower Defense. Да, с наггетсом", "url": "https://www.roblox.com/",         "icon": "gamepad",  "color": "lime",   "badge": "игра" },
+    { "id": "order",    "title": "Заказать сайт или бота",  "desc": "Фриланс: сайты, Telegram-боты, Roblox", "url": "https://t.me/zenixor",            "icon": "code",     "color": "pink",   "badge": "" }
+  ]
+}
